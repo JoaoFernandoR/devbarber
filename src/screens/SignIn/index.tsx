@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../../context/UserContext";
+import { useNavigation } from "@react-navigation/native";
 
 import BarberLogo from "../../../assets/barber.svg";
 import EmailSvg from "../../../assets/email.svg";
@@ -20,7 +21,11 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigation = useNavigation();
+
   const handleSubmit = () => {
+    if (email === "" || password === "") return;
+
     const user = {
       email,
       password,
@@ -31,7 +36,7 @@ const SignIn = () => {
 
   return (
     <Viewer>
-      <BarberLogo width="100%" height={163} />
+      <BarberLogo width="100%" height={163} style={{ marginBottom: 15 }} />
 
       <SignInput
         IconSvg={EmailSvg}
@@ -51,7 +56,13 @@ const SignIn = () => {
         <SignButtonText> LOGIN </SignButtonText>
       </SignButton>
 
-      <SignMessageButton>
+      <SignMessageButton
+        onPress={() =>
+          navigation.reset({
+            routes: [{ name: "SignUp" }],
+          })
+        }
+      >
         <SignMessageButtonText>
           Ainda não possui uma conta?
         </SignMessageButtonText>
