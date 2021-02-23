@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNavigation } from "@react-navigation/native";
 
 import BarberLogo from "../../../assets/barber.svg";
 
@@ -8,16 +7,14 @@ import { Viewer, LoadingIcon } from "./styles";
 import { mainWhite } from "../../Colors/colors";
 
 const Preload = () => {
-  const navigation = useNavigation();
-
   useEffect(() => {
     const checkToken = async () => {
-      const token = await AsyncStorage.getItem("token");
+      const token = await AsyncStorage.getItem("@token");
 
+      console.log(token);
       if (token) {
-        // validar o token
+        await AsyncStorage.clear();
       } else {
-        navigation.navigate("SignIn");
       }
     };
 

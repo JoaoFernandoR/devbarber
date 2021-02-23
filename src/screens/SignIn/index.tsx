@@ -21,6 +21,8 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { signIn } = useContext(UserContext);
+
   const navigation = useNavigation();
 
   const handleSubmit = () => {
@@ -31,7 +33,7 @@ const SignIn = () => {
       password,
     };
 
-    console.log(user);
+    signIn(user);
   };
 
   return (
